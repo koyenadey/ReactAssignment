@@ -1,0 +1,13 @@
+.countrydatacard{
+    margin: auto;
+    margin-top: 10rem;
+}
+.region{
+    text-transform: capitalize;
+    font-weight: bolder;
+    font-size: 24px;
+}
+.css-o69gx8-MuiCardMedia-root{
+    margin: auto;
+    width: 50%;
+}

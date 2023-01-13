@@ -7,18 +7,16 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-/* function createData(flag, name, region, population, languages, clickArrow) {
-  return { flag, name, region, population, languages, clickArrow };
-}
- */
 
-const CountryList = () => {
+const CountryList = (props) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [loadedCountryData, setLoadedCountryData] = useState([]);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currPage, setCurrPage] = useState(0);
+  const navigatePage = useNavigate();
 
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
@@ -97,8 +95,10 @@ const CountryList = () => {
                   </ul>
                 </TableCell>
                 <TableCell align="right">
-                  <Button variant="text">
-                    <span>&#10148;</span>
+                  <Button variant="text" onClick={()=>{
+                    navigatePage('/countrydetails/'+row.name,{replace: true});
+                  }}>
+                    &#10148;
                   </Button>
                 </TableCell>
               </TableRow>
