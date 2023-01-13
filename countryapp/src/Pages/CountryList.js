@@ -8,64 +8,39 @@ import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import { Button } from "@mui/material";
 
-function createData(flag, name, region, population, languages, clickArrow) {
+/* function createData(flag, name, region, population, languages, clickArrow) {
   return { flag, name, region, population, languages, clickArrow };
 }
-
-const handleChangePage = (event, newPage) => {
-  //setPage(newPage);
-};
-
-const handleChangeRowsPerPage = (event) => {
-  //setRowsPerPage(parseInt(event.target.value, 10));
-  //setPage(0);
-};
-
-const rows = [
-  createData(
-    "https://flagcdn.com/w320/in.png",
-    "India",
-    "Asia",
-    1380004385,
-    "English"
-  ),
-  createData(
-    "https://flagcdn.com/w320/my.png",
-    "Malaysia",
-    "Asia",
-    1380004385,
-    "Malay"
-  ),
-];
+ */
 
 const CountryList = () => {
 
   const [isLoading, setIsLoading] = useState(true);
-  const [loadedCountryData,setLoadedCountryData] = useState([]);
+  const [loadedCountryData, setLoadedCountryData] = useState([]);
+  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [currPage, setCurrPage] = useState(0);
 
-  useEffect(()=>{
+  useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-       const countrys = data.map((item)=>{
-            return {
-                flag: item.flags.png,
-                name: item.name.common,
-                region: item.region,
-                population: item.population,
-                languages: item.languages
-            };
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        const countrys = data.map((item) => {
+          return {
+            flag: item.flags.png,
+            name: item.name.common,
+            region: item.region,
+            population: item.population,
+            languages: item.languages,
+          };
         });
         //console.log(JSON.stringify(data[0].name.common));
         //console.log(countrys);
-      setIsLoading(false);
-      setLoadedCountryData(countrys);
-    });  
-  },[]);
-
-  
+        setIsLoading(false);
+        setLoadedCountryData(countrys);
+      });
+  }, []);
 
   if (isLoading) {
     return (
@@ -74,6 +49,14 @@ const CountryList = () => {
       </section>
     );
   }
+  const offset = currPage * itemsPerPage;
+  const limit = offset + itemsPerPage;
+  const handleChangePage = (event, pagenumber) => {
+    setCurrPage(pagenumber);
+  };
+  const handleChangeRowsPerPage = (event) => {
+    setItemsPerPage(parseInt(event.target.value, 10));
+  };
 
   return (
     <div>
@@ -90,24 +73,33 @@ const CountryList = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {loadedCountryData.map((row) => (
+            {loadedCountryData.slice(offset,limit).map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  <img src={row.flag} alt={row.name} height='60px' width='90px' />
+                  <img
+                    src={row.flag}
+                    alt={row.name}
+                    height="60px"
+                    width="90px"
+                  />
                 </TableCell>
                 <TableCell align="left">{row.name}</TableCell>
                 <TableCell align="left">{row.region}</TableCell>
                 <TableCell align="left">{row.population}</TableCell>
                 <TableCell align="left">
-                    <ul>
-                        {Object.values(row.languages || []).map(lang => <li>{lang}</li> )}
-                    </ul>
-                    </TableCell>
+                  <ul>
+                    {Object.values(row.languages || []).map((lang) => (
+                      <li>{lang}</li>
+                    ))}
+                  </ul>
+                </TableCell>
                 <TableCell align="right">
-                  <Button variant="text">Go</Button>
+                  <Button variant="text">
+                    <span>&#10148;</span>
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
@@ -117,9 +109,9 @@ const CountryList = () => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 15]}
         component="div"
-        count={rows.length}
-        rowsPerPage={5}
-        page={0}
+        count={loadedCountryData.length}
+        rowsPerPage={itemsPerPage}
+        page={currPage}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
