@@ -8,6 +8,8 @@ import TableRow from "@mui/material/TableRow";
 import TablePagination from "@mui/material/TablePagination";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import classes from './CountryList.module.css';
+import TableSortLabel from '@mui/material/TableSortLabel';
 
 
 const CountryList = ({searchTextName}) => {
@@ -17,7 +19,7 @@ const CountryList = ({searchTextName}) => {
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [currPage, setCurrPage] = useState(0);
   const navigatePage = useNavigate();
-
+  
   useEffect(() => {
     fetch("https://restcountries.com/v3.1/all")
       .then((response) => {
@@ -33,8 +35,6 @@ const CountryList = ({searchTextName}) => {
             languages: item.languages,
           };
         });
-        //console.log(JSON.stringify(data[0].name.common));
-        //console.log(countrys);
         setIsLoading(false);
         setLoadedCountryData(countrys);
       });
@@ -57,16 +57,23 @@ const CountryList = ({searchTextName}) => {
   };
   return (
     <div>
-      <TableContainer>
+      <TableContainer className={classes.tablelook}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Flag</TableCell>
-              <TableCell align="left">Name </TableCell>
-              <TableCell align="left">Regions</TableCell>
-              <TableCell align="left">Population</TableCell>
-              <TableCell align="left">Language</TableCell>
-              <TableCell align="right"></TableCell>
+              <TableCell className={classes.tableRow}>Flag</TableCell>
+              <TableCell className={classes.tableRow} align="left">
+              <TableSortLabel active={true} direction='asc'onClick={()=>{
+                const sortedName = loadedCountryData.sort((n1,n2)=>n1.name.localeCompare(n2.name));
+                setLoadedCountryData(sortedName);
+              }}>
+                Name
+              </TableSortLabel>
+              </TableCell>
+              <TableCell className={classes.tableRow} align="left">Regions</TableCell>
+              <TableCell className={classes.tableRow} align="left">Population</TableCell>
+              <TableCell className={classes.tableRow} align="left">Language</TableCell>
+              <TableCell className={classes.tableRow} align="right"></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -88,8 +95,8 @@ const CountryList = ({searchTextName}) => {
                 <TableCell align="left">{row.population}</TableCell>
                 <TableCell align="left">
                   <ul>
-                    {Object.values(row.languages || []).map((lang) => (
-                      <li>{lang}</li>
+                    {Object.values(row.languages || []).map((lang,index) => (
+                      <li key={index}>{lang}</li>
                     ))}
                   </ul>
                 </TableCell>
@@ -104,8 +111,7 @@ const CountryList = ({searchTextName}) => {
             ))}
           </TableBody>
         </Table>
-      </TableContainer>
-      <TablePagination
+        <TablePagination className={classes.paginationlook}
         rowsPerPageOptions={[5, 10, 15]}
         component="div"
         count={loadedCountryData.length}
@@ -114,6 +120,8 @@ const CountryList = ({searchTextName}) => {
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
+      </TableContainer>
+      
     </div>
   );
 };

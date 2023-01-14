@@ -80,6 +80,7 @@ const NavigationBar = (props) => {
             <StyledInputBase onChange={props.onSearch}
               placeholder="Search by country name"
               inputProps={{ 'aria-label': 'search' }}
+              value={props.searchTextName}
             />
           </Search>
         </Toolbar>

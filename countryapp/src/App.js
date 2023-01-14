@@ -15,7 +15,7 @@ function App() {
       <div>  
         <div>
           <Routes>
-            <Route path='/' element={<><NavigationBar onSearch={searchHandler} /><CountryList searchTextName={searchData} /></>}></Route>
+            <Route path='/' element={<><NavigationBar onSearch={searchHandler} searchTextName={searchData} /><CountryList searchTextName={searchData} /></>}></Route>
             <Route path='/countrydetails/:countryname' element={<CountryDetails />} ></Route>
           </Routes>
         </div>
