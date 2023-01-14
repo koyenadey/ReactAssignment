@@ -10,7 +10,7 @@ import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 
-const CountryList = (props) => {
+const CountryList = ({searchTextName}) => {
 
   const [isLoading, setIsLoading] = useState(true);
   const [loadedCountryData, setLoadedCountryData] = useState([]);
@@ -55,7 +55,6 @@ const CountryList = (props) => {
   const handleChangeRowsPerPage = (event) => {
     setItemsPerPage(parseInt(event.target.value, 10));
   };
-
   return (
     <div>
       <TableContainer>
@@ -71,7 +70,7 @@ const CountryList = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {loadedCountryData.slice(offset,limit).map((row) => (
+            {loadedCountryData.filter((itemSearch)=>itemSearch.name.includes(searchTextName)).slice(offset,limit).map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

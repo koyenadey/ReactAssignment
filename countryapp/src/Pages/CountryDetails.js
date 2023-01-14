@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardMedia from "@mui/material/CardMedia";
 import CardActions from "@mui/material/CardActions";
@@ -13,6 +12,21 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import classes from "./CountryDetails.module.css";
 import './CountryDetails.module.css';
+import ArrowLeftSharp from '@mui/icons-material/ArrowLeftSharp';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Place from '@mui/icons-material/Place';
+
+/* const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+})); */
+
 
 const CountryDetails = () => {
   const [isItemLoading, setIsItemLoading] = useState(true);
@@ -72,19 +86,33 @@ const CountryDetails = () => {
               title={item.name}
               subheader={item.capital}
             />
-            <CardMedia className={classes.flagPos}
+            <div className={classes.flagpos}>
+            <CardMedia
               component="img"
               height="194"
               image={item.flag}
               alt="country flag"
             />
+            </div>
+            
             <CardContent>
               <Typography variant="body2" color="text.secondary">
-                The country belongs to {item.region} region and a sub region {item.subregion} sub-region.
-                Located at the {item.LatLang[0]} &deg;N and {item.LatLang[1]} &deg;W, this country 
-                has a population of {item.population} and it has gained the independent, according to CIA World Factbook.
+                The country belongs to <span className={classes.highlighttext}>{item.region}</span> region and a <span className={classes.highlighttext}>{item.subregion}</span> sub-region.
+                Located at the <span className={classes.highlighttext}>{item.LatLang[0]}</span> &deg;N and <span className={classes.highlighttext}>{item.LatLang[1]}</span> &deg;W, this country 
+                has a population of <span className={classes.highlighttext}>{item.population}</span> and it has gained the independent, according to CIA World Factbook.
               </Typography>
             </CardContent>
+            <CardActions disableSpacing>
+            <IconButton aria-label="share">
+          <ArrowLeftSharp />
+        </IconButton>
+        <IconButton aria-label="Place">
+          <Place />
+        </IconButton>
+        <div className={classes.ExpandMore}>
+        <ExpandMoreIcon />
+        </div>
+      </CardActions>
           </>
         );
       })}

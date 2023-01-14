@@ -11,3 +11,15 @@
     margin: auto;
     width: 50%;
 }
+.ExpandMore{
+    margin-left: auto;
+}
+
+.highlighttext{
+    font-weight: bold;
+    color: blue;
+}
+
+.flagpos{
+    padding: 10px;
+}
