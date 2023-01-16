@@ -77,7 +77,7 @@ const CountryList = ({searchTextName}) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {loadedCountryData.filter((itemSearch)=>itemSearch.name.includes(searchTextName)).slice(offset,limit).map((row) => (
+            {loadedCountryData.filter((itemSearch)=>itemSearch.name.toLowerCase().includes(searchTextName.toLowerCase())).slice(offset,limit).map((row) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
