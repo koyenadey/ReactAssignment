@@ -1,0 +1,35 @@
+.mainContainer{
+    display: flex;
+    /* border: 2px solid black; */
+    width: 40%;
+    margin: auto;
+    flex-wrap: wrap;
+}
+
+.mainContainer > div {
+    /* border: 2px solid blue; */
+    
+}
+.footerContainer{
+    display: flex;
+}
+
+.footerContainer > div{
+    margin: 7px;
+    padding:10px;
+    width: 100px;
+    background-color: rgb(246, 243, 243);
+    line-height: 30px;
+}
+.statusBarDone{
+    margin-top: 30px;
+    border-left: 8px solid salmon;
+}
+.statusBarInProg{
+    margin-top: 30px;
+    border-left: 8px solid rgb(247, 215, 55);
+}
+.statusBarNotStarted{
+    margin-top: 30px;
+    border-left: 8px solid yellowgreen  ;
+}

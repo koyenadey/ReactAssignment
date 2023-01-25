@@ -1,0 +1,51 @@
+.rowContainer{
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    margin: 8px;
+    background-color: rgb(238, 238, 238);
+    /* border: 2px solid black; */
+}
+
+.statusSalmon{
+    background-color: salmon;
+    /* border:2px solid black; */
+    width: 1.4%;
+    height: 60px;
+}
+.statusGreen{
+    background-color: yellowgreen;
+    /* border:2px solid black; */
+    width: 1.4%;
+    height: 60px;
+}
+.statusYellow{
+    background-color: rgb(247, 215, 55);
+    /* border:2px solid black; */
+    width: 1.4%;
+    height: 60px;
+}
+.contents{
+    margin-left: 10px;
+    /* border: 2px solid green; */
+    height: 40px;
+    margin-top: 8px;
+    
+}
+.titleContainer{
+    padding: 0px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    margin-bottom: 2px;
+    width:500px;
+    font-weight: bold;
+}
+
+.deadlineContainer{
+    padding: 0px;
+    margin-block-start: 0px;
+    margin-block-end: 0px;
+    width:500px;
+    font-style: italic;
+}
+

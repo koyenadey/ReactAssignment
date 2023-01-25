@@ -1,0 +1,62 @@
+.mainContainer{
+    background-color: rgb(235, 231, 231);
+    width: 40%;
+    margin:auto
+}
+.formContainer
+{
+    /* border: 2px solid black; */
+    padding: 20px;  
+}
+
+.header{
+    padding: 1px;
+}
+
+.headerText{
+    margin-left: 15px;
+}
+
+.formControls{
+    margin: auto;
+    width: 95%;
+    text-align: center;
+    padding: 10px;
+}
+
+.title{
+    width:-webkit-fill-available;
+    display: block;
+    height: 30px;
+}
+
+.deadline{
+    width:-webkit-fill-available;
+    display: block;
+    height: 30px;
+}
+
+.status{
+    width:-webkit-fill-available;
+    display: block;
+    height: 30px;
+}
+.buttonClass{
+    padding: 8px;
+    text-align: right;
+}
+
+.Add{
+    margin: 5px;
+    padding: 8px;
+    width: 100px;
+    background-color: rgb(80, 136, 239);
+    color: white;
+}
+
+.Cancel{
+    padding: 8px;
+    width: 100px;
+    background-color: gray;
+    color: white; 
+}
